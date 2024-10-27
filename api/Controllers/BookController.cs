@@ -66,7 +66,7 @@ namespace api.Controllers
             return Ok(bookModel.ToBookDto());
 
         }
-
+        
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
@@ -83,5 +83,7 @@ namespace api.Controllers
 
             return NoContent();
         }
+
+
     }
 }
