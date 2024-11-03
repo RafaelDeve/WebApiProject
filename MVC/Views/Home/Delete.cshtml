@@ -1,0 +1,48 @@
+@model MVC.Models.Book
+
+@{
+    ViewBag.Title = "Delete Book";
+}
+
+<h2>Delete Book</h2>
+
+<div>
+    <h4>Are you sure you want to delete this book?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm("DeleteConfirmed", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id) // Asegúrate de incluir el Id para la eliminación
+    <div>
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        @Html.ActionLink("Cancel", "GetAllBooks", null, new { @class = "btn btn-default" })
+    </div>
+}

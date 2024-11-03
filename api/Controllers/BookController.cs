@@ -19,14 +19,14 @@ namespace api.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("getall")]
         public IActionResult GetAll(){
             var books = _context.Book.ToList()
                 .Select(s => s.ToBookDto());
             return Ok(books);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getbyid/{id}")]
         public IActionResult GetById([FromRoute] int id) {
             var book = _context.Book.Find(id);
             if (book == null)
@@ -37,7 +37,7 @@ namespace api.Controllers
             return Ok(book.ToBookDto());
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult Create([FromBody] CreateBookRequestDto bookDto){
             var bookModel = bookDto.ToBookFromCreateDTO();
             _context.Book.Add(bookModel);
@@ -45,8 +45,8 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetById), new {id = bookModel.Id}, bookModel.ToBookDto());
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("update/{id}")]
+        
 
         public IActionResult Update([FromRoute] int id, [FromBody] UpdateBookRequestDto updateDto){
             var bookModel = _context.Book.FirstOrDefault(x => x.Id == id);
@@ -67,8 +67,8 @@ namespace api.Controllers
 
         }
         
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("delete/{id}")]
+        
         public IActionResult Delete([FromRoute] int id)
         {
             var bookModel = _context.Book.FirstOrDefault(x => x.Id == id);
