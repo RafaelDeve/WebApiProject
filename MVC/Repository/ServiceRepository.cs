@@ -1,6 +1,6 @@
 using System;
 using System.Net.Http;
-using Microsoft.Extensions.Configuration; // Add this using directive
+using Microsoft.Extensions.Configuration; 
 
 namespace MVC.Repository
 {
@@ -8,11 +8,11 @@ namespace MVC.Repository
     {
         public HttpClient Client { get; set; }
 
-        // Add a constructor that takes IConfiguration as a parameter
+        
         public ServiceRepository(IConfiguration configuration)
         {
             Client = new HttpClient();
-            Client.BaseAddress = new Uri(configuration["ServiceUrl"]); // Use the configuration object to get the ServiceUrl
+            Client.BaseAddress = new Uri(configuration["ServiceUrl"]); 
         }
 
         public HttpResponseMessage GetResponse(string url)

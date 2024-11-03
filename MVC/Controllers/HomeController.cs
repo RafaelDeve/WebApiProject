@@ -2,21 +2,21 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models;
-using System.Linq; // Asegúrate de tener este using para trabajar con LINQ
-using Microsoft.EntityFrameworkCore; // Si usas Entity Framework
+using System.Linq; 
+using Microsoft.EntityFrameworkCore; 
 
 namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly YourDbContext _context; // Asegúrate de que este es tu contexto de base de datos
+        private readonly YourDbContext _context; 
 
-        // Constructor con inyección de dependencias para el logger y el contexto de la base de datos
+        
         public HomeController(ILogger<HomeController> logger, YourDbContext context)
         {
             _logger = logger;
-            _context = context; // Inyecta el contexto
+            _context = context; 
         }
 
         public IActionResult Index()
@@ -29,10 +29,10 @@ namespace MVC.Controllers
             return View();
         }
 
-        public IActionResult GetAllBooks() // Agrega el método GetAllBooks
+        public IActionResult GetAllBooks() 
         {
-            var books = _context.Book.ToList(); // Obtén la lista de libros
-            return View(books); // Devuelve la vista con la lista de libros
+            var books = _context.Book.ToList(); 
+            return View(books); 
         }
 
         public IActionResult EditBook(int id)
@@ -42,10 +42,10 @@ namespace MVC.Controllers
             {
                 return NotFound();
             }
-            return View(book); // Devuelve la vista con el modelo del libro para editar
+            return View(book); 
         }
 
-        // POST: Edit
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Book book)
@@ -59,17 +59,17 @@ namespace MVC.Controllers
             {
                 _context.Update(book);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(GetAllBooks)); // Redirige a la lista de libros
+                return RedirectToAction(nameof(GetAllBooks)); 
             }
             return View(book);
         } 
 
         public ActionResult Delete(int id)
         {
-            var book = _context.Book.Find(id); // Busca el libro por su ID
+            var book = _context.Book.Find(id); 
             if (book == null)
             {
-                return NotFound(); // Retorna NotFound si el libro no existe
+                return NotFound(); 
             }
             ViewBag.Title = "Delete Book";
             return View(book); 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc; // Changed to ASP.NET Core MVC
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.Extensions.Configuration;
 using MVC.Models;
 using MVC.Repository;
@@ -18,14 +18,14 @@ namespace MVC.Controllers
             _serviceRepo = new ServiceRepository(configuration);
         }
 
-        // GET: Book/GetAllBooks
+       
         public ActionResult GetAllBooks()
         {
             try
             {
                 HttpResponseMessage response = _serviceRepo.GetResponse("api/book/getall");
                 response.EnsureSuccessStatusCode();
-                List<Book> books = response.Content.ReadAsAsync<List<Book>>().Result; // Consider using async/await
+                List<Book> books = response.Content.ReadAsAsync<List<Book>>().Result; 
                 ViewBag.Title = "All Books";
                 return View(books);
             }
@@ -35,12 +35,12 @@ namespace MVC.Controllers
             }
         }
 
-        // GET: Book/Details/5
+        
         public ActionResult Details(int id)
         {
             HttpResponseMessage response = _serviceRepo.GetResponse($"api/book/getbyid/{id}");
             response.EnsureSuccessStatusCode();
-            Book book = response.Content.ReadAsAsync<Book>().Result; // Consider using async/await
+            Book book = response.Content.ReadAsAsync<Book>().Result; 
             ViewBag.Title = "Book Details";
             return View(book);
         }
@@ -49,7 +49,7 @@ namespace MVC.Controllers
         {
             HttpResponseMessage response = _serviceRepo.GetResponse($"api/book/getbyid/{id}");
             response.EnsureSuccessStatusCode();
-            Book book = response.Content.ReadAsAsync<Book>().Result; // Consider using async/await
+            Book book = response.Content.ReadAsAsync<Book>().Result;
             ViewBag.Title = "Edit Book";
             return View(book);
         }

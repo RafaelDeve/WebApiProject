@@ -40,7 +40,7 @@
 @using (Html.BeginForm("DeleteConfirmed", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id) // Asegúrate de incluir el Id para la eliminación
+    @Html.HiddenFor(model => model.Id) 
     <div>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         @Html.ActionLink("Cancel", "GetAllBooks", null, new { @class = "btn btn-default" })
